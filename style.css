@@ -1,4 +1,4 @@
-body {
+/* body {
   background-color: #2a4782;
   font-family: 'Open Sans';
 }
@@ -38,7 +38,16 @@ div{
   transform: translateY(-10px);
 }
 
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px; /* Add some gap between columns */
+  /*
+}
 
+.column {
+  padding: 10px;
+}
 
 img {
   width: 150px;
@@ -54,4 +63,6 @@ img {
 }
 .link{
     text-decoration:none;
-}
+} */
+
+

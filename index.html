@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
   <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -24,4 +24,365 @@
   </div>
   </section>
   
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casamento Kaka e Lucas</title>
+    <style>
+        /* Fundo da página */
+        body {
+            background-image: url('./img/fundosite2.jpg');
+            /* Substitua pelo caminho da sua imagem */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilo para os títulos */
+        h1,
+        h2 {
+            text-align: center;
+            color: #8a8;
+            text-shadow: 1.3px 1.3px 2.6px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo do container principal */
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Colunas laterais */
+        .coluna-esquerda,
+        .coluna-direita {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .coluna-esquerda img,
+        .coluna-direita img {
+            width: 150px;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        /* Container dos cards */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            flex: 1 1 50%;
+            /* Garante que os cards ocupem 50% do espaço na tela */
+        }
+
+        /* Estilo dos cards */
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        .card button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .card button:hover {
+            background-color: #45a049;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            margin-top: 10px;
+        }
+
+        /* Estilo do modal */
+        .modal {
+            display: none; /* Esconde o modal inicialmente */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Estilos para o título h2 */
+        .modal h2 {
+            color: black;
+            margin-bottom: 20px; /* Dá um espaço abaixo do título */
+        }
+
+        /* Estilos para o conteúdo do modal */
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            position: relative;
+        }
+
+        /* Estilos para a imagem do QR Code */
+        .modal img {
+            width: 200px;
+            margin: 20px 0; /* Adiciona margem para separar um pouco da imagem do restante */
+        }
+
+        /* Estilos para o botão */
+        .modal button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%; /* O botão ocupa toda a largura */
+            margin-top: 10px;
+        }
+
+        .modal button:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilos para o campo de nome do doador */
+        .label-doador {
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .input-doador {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box; /* Garante que o padding não afete a largura total */
+        }
+
+        /* Foco no campo de nome do doador */
+        .input-doador:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        /* Melhor visualização no modal */
+        .codigo-pix-container {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .codigo-pix-container {
+            margin-top: 10px;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+            word-wrap: break-word;
+            overflow-x: auto;
+            max-width: 100%;
+        }
+
+        .codigo-pix-container:hover {
+            background-color: #ddd;
+        }
+
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Colunas laterais */
+        .coluna-esquerda,
+        .coluna-direita {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .coluna-esquerda img,
+        .coluna-direita img {
+            width: 150px;
+            height: auto;
+            margin-top: 10px;
+            /* Moldura com borda dupla e sombreada */
+            border: 10px solid #8B5E3C;
+            /* Cor de madeira */
+            border-radius: 15px;
+            /* Bordas arredondadas */
+            padding: 15px;
+            /* Espaçamento interno para dar a sensação de profundidade */
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3), inset 0px 0px 10px rgba(255, 255, 255, 0.2);
+            /* Sombras internas e externas para profundidade */
+            background-color: #f4f1ec;
+            /* Cor de fundo da moldura (para contrastar com a borda) */
+            position: relative;
+        }
+
+        .coluna-esquerda img::before,
+        .coluna-direita img::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.3));
+            /* Gradiente para dar um efeito de brilho */
+            border-radius: 15px;
+            z-index: -1;
+        }
+
+        /* Media Query para telas menores */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                /* Faz a coluna e cards ficarem em coluna em telas pequenas */
+                align-items: center;
+            }
+
+            .coluna-esquerda,
+            .coluna-direita {
+                position: relative;
+                left: 0;
+                top: 0;
+                margin-top: 20px;
+            }
+
+            .card-container {
+                flex: 1 1 100%;
+                /* Cards ocupam 100% da largura disponível */
+            }
+
+            .coluna-esquerda img,
+            .coluna-direita img {
+                width: 100%;
+                /* Ajusta o tamanho das imagens para 100% da largura disponível */
+                margin-top: 10px;
+            }
+        }
+
+        /* Media Query para esconder as imagens laterais em telas muito pequenas */
+        @media (max-width: 775px) {
+
+            .coluna-esquerda,
+            .coluna-direita {
+                display: none;
+                /* Esconde as imagens laterais */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Títulos -->
+    <h1>Casamento Lucas e Kaka</h1>
+    <h2>Lista de Presentes</h2>
+
+    <!-- Container Principal -->
+    <div class="main-container">
+        <!-- Coluna de imagens à esquerda -->
+        <div class="coluna-esquerda">
+            <img src="https://avatars.githubusercontent.com/u/54318740?s=400&u=f696645e2d7f1c6e4cb1e1ddc3b43b9f5e74dd62&v=4"
+                alt="Decoração 1">
+            <img src="https://avatars.githubusercontent.com/u/37753278?v=4" alt="Decoração 2">
+        </div>
+
+        <!-- Container dos presentes -->
+        <div id="cardContainer" class="card-container"></div>
+
+        <!-- Coluna de imagens à direita -->
+        <div class="coluna-direita">
+            <img src="https://avatars.githubusercontent.com/u/37753278?v=4" alt="Decoração 1">
+            <img src="https://avatars.githubusercontent.com/u/54318740?s=400&u=f696645e2d7f1c6e4cb1e1ddc3b43b9f5e74dd62&v=4"
+                alt="Decoração 2">
+        </div>
+    </div>
+
+    <!-- Modal para exibir o QR Code -->
+    <div id="qrCodeModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+
+            <!-- Título com cor preta -->
+            <h2 style="color: black;">QR Code do Pix</h2>
+
+            <img id="qrCodeImage" src="" alt="QR Code">
+
+            <!-- Código Pix (clicável para copiar) -->
+            <div class="codigo-pix-container">
+                <p id="codigoPix" onclick="copiarCodigoPix()">Clique para copiar o código Pix</p>
+            </div>
+
+            <!-- Campo para quem está dando o presente se identificar -->
+            <label for="doadorNome" class="label-doador">Seu nome:</label>
+            <input type="text" id="doadorNome" name="doadorNome" placeholder="Digite seu nome" class="input-doador">
+
+            <!-- Botão de confirmação do Pix realizado -->
+            <button id="pixRealizadoBtn" style="margin-top: 10px; width: 100%;">Pix realizado</button>
+        </div>
+    </div>
+
+    <!-- Script para carregar os presentes -->
+    <script src="script.js"></script>
+
+</body>
+
 </html>
