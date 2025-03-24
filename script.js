@@ -3,7 +3,7 @@ async function gerarPix(valorTotal) {
     formData.append("valor", valorTotal);
 
     try {
-        const response = await fetch("http://localhost:8080/pix/gerar", {
+        const response = await fetch("https://casamentobackdeploy.onrender.com/pix/gerar", {
             method: "POST",
             body: formData
         });
@@ -85,7 +85,7 @@ async function EnviarOK() {
     };
 
     try {
-        const response = await fetch("http://localhost:8080/transacoes", {
+        const response = await fetch("https://casamentobackdeploy.onrender.com/transacoes", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dadosCompraPost)
@@ -121,7 +121,7 @@ function fecharModal() {
 // Função para buscar os presentes e gerar os cards
 async function carregarPresentes() {
     try {
-        const response = await fetch("http://localhost:8080/presente");
+        const response = await fetch("https://casamentobackdeploy.onrender.com/presente");
 
         if (!response.ok) {
             throw new Error("Erro ao carregar presentes");
