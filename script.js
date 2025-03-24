@@ -21,7 +21,7 @@ async function gerarPix(valorTotal) {
         const codigoPixElement = document.getElementById("codigoPix");
 
         // Atualiza a imagem do QR Code
-        qrCodeImage.src = `http://localhost:8080/pix/qrcode?path=${encodeURIComponent(data.caminhoQRCode)}`;
+        qrCodeImage.src = `https://casamentobackdeploy.onrender.com/pix/qrcode?path=${encodeURIComponent(data.caminhoQRCode)}`;
         qrCodeImage.alt = "QR Code do Pix gerado";
 
         // Atualiza o código Pix
