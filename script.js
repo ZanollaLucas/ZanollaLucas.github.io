@@ -185,7 +185,12 @@ async function carregarPresentes() {
                     const novoValor = parseFloat(event.target.value);
                     if (!isNaN(novoValor) && novoValor >= 0) {
                         // Atualiza o valor no card
-                        document.getElementById(`valorPresente${presente.id}`).textContent = `R$ ${novoValor.toFixed(2)}`;
+                        const valorElemento = document.getElementById(`valorPresente${presente.id}`);
+                        if (valorElemento) {
+                            valorElemento.textContent = `R$ ${novoValor.toFixed(2)}`;
+                        } else {
+                            console.error(`Elemento com ID "valorPresente${presente.id}" não encontrado.`);
+                        }
                     } else {
                         alert("Por favor, insira um valor válido.");
                     }
@@ -205,7 +210,7 @@ async function gerarPixParaPresente(id, valor) {
         return;
     }
 
-    if(valor === 0.00 || valor === null){
+    if (valor === 0.00 || valor === null) {
         alert("Por favor, insira um valor válido ou diferente de 0.00")
     }
 
@@ -254,7 +259,7 @@ function formatarValorNoBlur(input) {
 
 function bloquearLetras(event, input) {
     const tecla = event.key;
-    
+
     // Permite números, vírgula, ponto e as teclas de controle como Backspace, Delete e Arrow keys
     if (!/[0-9,\.]/.test(tecla) && tecla !== "Backspace" && tecla !== "Delete" && tecla !== "ArrowLeft" && tecla !== "ArrowRight") {
         event.preventDefault(); // Bloqueia a entrada se não for um número, ponto ou vírgula
