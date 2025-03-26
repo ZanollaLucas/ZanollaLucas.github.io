@@ -212,7 +212,7 @@ async function carregarPresentes() {
         } catch (error) {
             console.warn(`Tentativa ${tentativa} falhou. Tentando novamente...`);
             if (tentativa === 5) {
-                cardContainer.innerHTML = "<p style='color: red;'>Erro ao carregar os presentes. Tente novamente mais tarde.</p>";
+                cardContainer.innerHTML = "<p style='color: red;'>Erro ao carregar os presentes. Favor abra o site novamente.</p>";
             } else {
                 await new Promise(resolve => setTimeout(resolve, 3000)); // Aguarda 3 segundos antes de tentar novamente
             }
