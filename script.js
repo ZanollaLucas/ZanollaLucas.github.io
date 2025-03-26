@@ -141,6 +141,8 @@ async function carregarPresentes() {
 
             const cardContainer = document.getElementById("cardContainer");
 
+            cardContainer.innerHTML = "";
+
             presentes.forEach(presente => {
                 // Criando o card do presente
                 const card = document.createElement("div");
