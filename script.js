@@ -120,33 +120,43 @@ function fecharModal() {
 
 // Função para buscar os presentes e gerar os cards
 async function carregarPresentes() {
-    try {
-        const response = await fetch("https://casamentobackdeploy.onrender.com/presente");
+    const cardContainer = document.getElementById("cardContainer");
+    //console.log("entrou no prente")
 
-        if (!response.ok) {
-            throw new Error("Erro ao carregar presentes");
-        }
+    // Mostra um indicador de carregamento
+    cardContainer.innerHTML = "<p id='loading'>Carregando presentes...</p>";
 
-        const presentes = await response.json();
+    for (let tentativa = 1; tentativa <= 5; tentativa++) {
+        //console.log("entrou no for");
+        try {
+            //const response = await fetch("https://casamentobackdeploy.onrender.com/presente");
+            //console.log("entrou no carregar presntes dentro do for try");
+            const response = await fetchComTimeout("https://casamentobackdeploy.onrender.com/presente", 5000);
 
-        const cardContainer = document.getElementById("cardContainer");
+            if (!response.ok) {
+                throw new Error("Erro ao carregar presentes");
+            }
 
-        presentes.forEach(presente => {
-            // Criando o card do presente
-            const card = document.createElement("div");
-            card.classList.add("card");
+            const presentes = await response.json();
 
-            // Verificar se o valor do presente é null ou 0.00 e permitir edição
-            let valorPresente = presente.valor;
-            let valorHTML = `
+            const cardContainer = document.getElementById("cardContainer");
+
+            presentes.forEach(presente => {
+                // Criando o card do presente
+                const card = document.createElement("div");
+                card.classList.add("card");
+
+                // Verificar se o valor do presente é null ou 0.00 e permitir edição
+                let valorPresente = presente.valor;
+                let valorHTML = `
                 <p>R$ <span id="valorPresente${presente.id}">${valorPresente.toFixed(2)}</span></p>
             `;
-            let botao = `
+                let botao = `
                 <button onclick="gerarPixParaPresente(${presente.id}, ${presente.valor})" style="margin-top: 10px; width: 100%;">Gerar PIX</button>
             `;
 
-            if (valorPresente === null || valorPresente === 0.00) {
-                valorHTML = `
+                if (valorPresente === null || valorPresente === 0.00) {
+                    valorHTML = `
                     <label for="valorPresenteInput${presente.id}">Valor em R$:</label>
                     <input    type="text" 
                         id="valorPresenteInput${presente.id}" 
@@ -158,14 +168,14 @@ async function carregarPresentes() {
                         placeholder="Digite o valor"
                     >
                 `;
-                botao = `
+                    botao = `
                 <button onclick="gerarPixParaPresente(${presente.id}, parseFloat(document.getElementById('valorPresenteInput${presente.id}').value.replace(',', '.')))" style="margin-top: 10px; width: 100%;">Gerar PIX</button>
                 `;
 
-            }
+                }
 
-            // Adicionando o HTML do card
-            card.innerHTML = `
+                // Adicionando o HTML do card
+                card.innerHTML = `
                 <img src="${presente.img}" alt="${presente.nome}">
                 <h3>${presente.nome}</h3>
                 <p>${presente.descricao}</p>
@@ -175,32 +185,56 @@ async function carregarPresentes() {
                 ${botao}
             `;
 
-            // Adicionando o card ao container
-            cardContainer.appendChild(card);
+                // Adicionando o card ao container
+                cardContainer.appendChild(card);
 
-            // Atualizar o valor quando o input de valor for alterado
-            if (valorPresente === null || valorPresente === 0.00) {
-                const valorInput = document.getElementById(`valorPresenteInput${presente.id}`);
-                valorInput.addEventListener('change', (event) => {
-                    const novoValor = parseFloat(event.target.value);
-                    if (!isNaN(novoValor) && novoValor >= 0) {
-                        // Atualiza o valor no card
-                        const valorElemento = document.getElementById(`valorPresente${presente.id}`);
-                        if (valorElemento) {
-                            valorElemento.textContent = `R$ ${novoValor.toFixed(2)}`;
+                // Atualizar o valor quando o input de valor for alterado
+                if (valorPresente === null || valorPresente === 0.00) {
+                    const valorInput = document.getElementById(`valorPresenteInput${presente.id}`);
+                    valorInput.addEventListener('change', (event) => {
+                        const novoValor = parseFloat(event.target.value);
+                        if (!isNaN(novoValor) && novoValor >= 0) {
+                            // Atualiza o valor no card
+                            const valorElemento = document.getElementById(`valorPresente${presente.id}`);
+                            if (valorElemento) {
+                                valorElemento.textContent = `R$ ${novoValor.toFixed(2)}`;
+                            } else {
+                                console.error(`Elemento com ID "valorPresente${presente.id}" não encontrado.`);
+                            }
                         } else {
-                            console.error(`Elemento com ID "valorPresente${presente.id}" não encontrado.`);
+                            alert("Por favor, insira um valor válido.");
                         }
-                    } else {
-                        alert("Por favor, insira um valor válido.");
-                    }
-                });
+                    });
+                }
+            });
+        } catch (error) {
+            console.warn(`Tentativa ${tentativa} falhou. Tentando novamente...`);
+            if (tentativa === 5) {
+                cardContainer.innerHTML = "<p style='color: red;'>Erro ao carregar os presentes. Tente novamente mais tarde.</p>";
+            } else {
+                await new Promise(resolve => setTimeout(resolve, 3000)); // Aguarda 3 segundos antes de tentar novamente
             }
-        });
-    } catch (error) {
-        //alert("Erro:", error);
+        }
     }
 }
+
+async function fetchComTimeout(url, timeout = 10000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+    try {
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        return response;
+    } catch (error) {
+        if (error.name === "AbortError") {
+            throw new Error("Tempo limite excedido ao tentar carregar os presentes.");
+        }
+        throw error;
+    }
+}
+
+
 
 // Função para gerar o Pix para um presente específico com a quantidade
 async function gerarPixParaPresente(id, valor) {
