@@ -140,7 +140,7 @@ async function carregarPresentes() {
             let presentes;
             try {
                 const texto = await response.text();
-                alert("Resposta da API:" + texto); // Log para debug
+                //alert("Resposta da API:" + texto); // Log para debug
                 presentes = JSON.parse(texto);
 
                 if (!Array.isArray(presentes)) {
@@ -225,6 +225,7 @@ async function carregarPresentes() {
                     console.error(`Erro ao processar o presente ${presente?.id}:`, cardError);
                 }
             });
+        break;    
         } catch (error) {
             if (error.message.includes("timeout")) {
                 console.warn(`Tentativa ${tentativa} falhou: Timeout. Tentando novamente...`);
