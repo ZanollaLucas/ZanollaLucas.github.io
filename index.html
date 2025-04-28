@@ -120,7 +120,8 @@
         }
 
         .botao-container {
-            margin-top: auto; /* Empurra o botão para o final do card */
+            position: absolute;
+            bottom: 16px; /* distância fixa do fundo */
             padding-top: 10px;
         }
 
@@ -132,7 +133,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-        }
+            }
 
         .card button:hover {
             background-color: #45a049;
@@ -267,6 +268,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            height: 100%;
         }
 
         .coluna-esquerda img,
@@ -285,7 +287,7 @@
             /* Sombras internas e externas para profundidade */
             background-color: #f4f1ec;
             /* Cor de fundo da moldura (para contrastar com a borda) */
-            position: fixed;
+            position: sticky;
         }
 
         .coluna-esquerda img::before,
