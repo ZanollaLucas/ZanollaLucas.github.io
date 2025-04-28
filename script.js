@@ -195,7 +195,7 @@ async function carregarPresentes() {
                     card.innerHTML = `
                 <img src="${presente.img}" alt="${presente.nome}">
                 <h3>${presente.nome}</h3>
-                <p>${presente.descricao}</p>
+                ${presente.descricao && presente.descricao.trim() !== '' ? `<p>${presente.descricao}</p>` : ''}
                 ${valorHTML}
                 <div class="quantidade-container">
                     <label for="${presente.id}">Quantidade:</label>
