@@ -167,7 +167,7 @@ async function carregarPresentes() {
                 <p>R$ <span id="valorPresente${presente.id}">${valorPresente.toFixed(2)}</span></p>
             `;
                     let botao = `
-                <button onclick="gerarPixParaPresente(${presente.id}, ${presente.valor})" style="margin-bottom: 10px; width: 100%;">Gerar PIX</button>
+                <button onclick="gerarPixParaPresente(${presente.id}, ${presente.valor})">Gerar PIX</button>
             `;
 
                     if (valorPresente === null || valorPresente === 0.00) {
@@ -184,7 +184,7 @@ async function carregarPresentes() {
                     >
                 `;
                         botao = `
-                <button onclick="gerarPixParaPresente(${presente.id}, parseFloat(document.getElementById('valorPresenteInput${presente.id}').value.replace(',', '.')))" style="margin-bottom: 10px; width: 100%;">Gerar PIX</button>
+                <button onclick="gerarPixParaPresente(${presente.id}, parseFloat(document.getElementById('valorPresenteInput${presente.id}').value.replace(',', '.')))">Gerar PIX</button>
                 `;
 
                     }
