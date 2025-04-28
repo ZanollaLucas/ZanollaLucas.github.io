@@ -105,14 +105,18 @@
 
         /* Estilo dos cards */
         .card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 16px;
-            width: 250px;
-            text-align: center;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        }
+    display: flex;                /* <- adiciona flex */
+    flex-direction: column;        /* <- coloca os itens na vertical */
+    justify-content: space-between; /* <- empurra o botão para o final */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    width: 250px;
+    height: 400px; /* <- define altura fixa para o card */
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
 
         .card img {
             width: 100%;
