@@ -105,18 +105,18 @@
 
         /* Estilo dos cards */
         .card {
-    display: flex;                /* <- adiciona flex */
-    flex-direction: column;        /* <- coloca os itens na vertical */
-    justify-content: space-between; /* <- empurra o botão para o final */
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    width: 250px;
-    height: 400px; /* <- define altura fixa para o card */
-    text-align: center;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-}
+            display: flex;                /* <- adiciona flex */
+            flex-direction: column;        /* <- coloca os itens na vertical */
+            justify-content: space-between; /* <- empurra o botão para o final */
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            width: 250px;
+            height: 600px; /* <- define altura fixa para o card */
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
 
         .card img {
             width: 100%;
@@ -267,7 +267,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            height: 100%;
+            height: auto;
         }
 
         .coluna-esquerda img,
@@ -286,7 +286,7 @@
             /* Sombras internas e externas para profundidade */
             background-color: #f4f1ec;
             /* Cor de fundo da moldura (para contrastar com a borda) */
-            position: sticky;
+            
         }
 
         .coluna-esquerda img::before,
