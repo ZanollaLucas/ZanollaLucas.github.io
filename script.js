@@ -167,7 +167,7 @@ async function carregarPresentes() {
                 <p>R$ <span id="valorPresente${presente.id}">${valorPresente.toFixed(2)}</span></p>
             `;
                     let botao = `
-                    <div class="botao-container">
+                    <div class="card button">
                         <button onclick="gerarPixParaPresente(${presente.id}, ${presente.valor})">Gerar PIX</button>
                     </div>    
             `;
