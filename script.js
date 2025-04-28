@@ -172,6 +172,7 @@ async function carregarPresentes() {
 
                     if (valorPresente === null || valorPresente === 0.00) {
                         valorHTML = `
+                        <div class="quantidade-container">
                     <label for="valorPresenteInput${presente.id}">Valor em R$:</label>
                     <input    type="text" 
                         id="valorPresenteInput${presente.id}" 
@@ -182,6 +183,7 @@ async function carregarPresentes() {
                         onblur="formatarValorNoBlur(this)"
                         placeholder="Digite o valor"
                     >
+                    </div>
                 `;
                         botao = `
                 <button onclick="gerarPixParaPresente(${presente.id}, parseFloat(document.getElementById('valorPresenteInput${presente.id}').value.replace(',', '.')))" style="margin-top: 10px; width: 100%;">Gerar PIX</button>
@@ -195,8 +197,10 @@ async function carregarPresentes() {
                 <h3>${presente.nome}</h3>
                 <p>${presente.descricao}</p>
                 ${valorHTML}
-                <label for="${presente.id}">Quantidade:</label>
-                <input type="number" id="${presente.id}" name="quantidade" value="1" min="1">
+                <div class="quantidade-container">
+                    <label for="${presente.id}">Quantidade:</label>
+                    <input type="number" id="${presente.id}" name="quantidade" value="1" min="1">
+                </div>
                 ${botao}
             `;
 
