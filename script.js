@@ -153,7 +153,7 @@ async function carregarPresentes() {
             const cardContainer = document.getElementById("cardContainer");
 
             cardContainer.innerHTML = "";
-
+            presentes.sort((a, b) => a.valor - b.valor);
             presentes.forEach(presente => {
                 try {
                     console.log("Processando presente:", presente);
